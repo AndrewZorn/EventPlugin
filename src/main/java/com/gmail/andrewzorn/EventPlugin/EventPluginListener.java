@@ -27,30 +27,21 @@ public class EventPluginListener implements Listener
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)
-	public void onBlockPlace(BlockPlaceEvent event) {
-		if (event.isCancelled()) return;
+	public void build (PlayerInteractEvent Event event) {
+		if (event.getAction() == ACTION.LEFT_CLICK_BLOCK) {
+			Block buildOn = event.getClickedBlock();
+			if(buildOn!=null) {
+				Location buildLocation = buildOn.location();
+				World world = buildLocation.getWorld();
 
-		if (event.getBlock().getType() == Material.TNT) {
-			event.setCancelled(true);
-
-			Player player = event.getPlayer();
-
-			player.sendMessage(ChatColor.RED+"You are not allowed to use TNT on this server!");
-
-			for (Player onLinePlayer : Bukkit.getServer().getOnlinePlayers()) {
-				if (onLinePlayer.isOp()) {
-					onLinePlayer.sendMessage(player.getName()+" just placed TNT");
+				for(int i=0;i<Integer.parseInt(args[0]);i++) {
+					Block toChange = world.getBlockAt(buildLocation);
+					toChange.setTypeId(05);
+					buildLocation.setZ(location.getZ()+1);
 				}
+
+				plugin.logger.info("Bridge built.");
 			}
-		}
-	}
-
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onExplosionPrime(ExplosionPrimeEvent event) {
-		if (event.isCancelled()) return;
-
-		if (event.getEntity() instanceof TNTPrimed) {
-			event.setCancelled(true);
 		}
 	}
 }

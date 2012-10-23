@@ -26,7 +26,7 @@ public class EventPluginCommandExecutor implements CommandExecutor
 			float direction = player.getLocation().getYaw();
 			
 			location.setY(location.getY()-1);
-			for(int i=0;i<Integer.parseInt(args[0]) ;i++) { //Integer.parseInt(args[0])
+			for(int i=0;i<Integer.parseInt(args[0]);i++) {
 				Block toChange = world.getBlockAt(location);
 				toChange.setTypeId(05);
 				location.setZ(location.getZ()+1);
