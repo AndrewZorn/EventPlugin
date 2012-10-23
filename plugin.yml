@@ -1,0 +1,20 @@
+main: com.gmail.andrewzorn.EventPlugin.EventPlugin
+name: EventPlugin
+version: 1.0
+author: Andrew Zorn
+commands:
+  basic:
+    description: basic
+    usage: /basic message
+    permission: ep.basic
+  woodenBridge:
+    description: Makes a wooden bridge.
+    usage: /woodenBridge <length>
+    permission: ep.woodenBridge
+permissions:
+  ep.*:
+    description: basic permissions
+    default: true
+    children:
+      ep.woodenBridge:
+        description: is this necessary?
